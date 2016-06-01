@@ -1,0 +1,67 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016-5-2 18:35:54 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.lian.entity.TbCompany" table="TB_COMPANY" schema="SCOTT">
+        <id name="CId" type="int">
+            <column name="C_ID" precision="22" scale="0" />
+            <generator class="sequence">
+	       		<param name="sequence">tbcompany_pk_seq</param>
+	       </generator>
+        </id>
+        <property name="CName" type="string">
+            <column name="C_NAME" length="16" not-null="true" />
+        </property>
+        <property name="CEmail" type="string">
+            <column name="C_EMAIL" length="20" not-null="true" />
+        </property>
+        <property name="CPassword" type="string">
+            <column name="C_PASSWORD" length="16" not-null="true" />
+        </property>
+        <property name="CComname" type="string">
+            <column name="C_COMNAME" length="16" />
+        </property>
+        <property name="CLocation" type="string">
+            <column name="C_LOCATION" length="30" />
+        </property>
+        <property name="CRelname" type="string">
+            <column name="C_RELNAME" length="16" />
+        </property>
+        <property name="CRelphone" type="int">
+            <column name="C_RELPHONE" precision="22" scale="0" />
+        </property>
+        <property name="CWeixin" type="string">
+            <column name="C_WEIXIN" length="16" />
+        </property>
+        <property name="CDate" type="date">
+            <column name="C_DATE" length="7" not-null="true">
+                <comment>&#215;&#162;&#178;&#225;&#200;&#213;&#198;&#218;</comment>
+            </column>
+        </property>
+        <set name="tbCompanyResumes" table="TB_COMPANY_RESUME" inverse="true" lazy="false" fetch="select">
+            <key>
+                <column name="CRS_CID" precision="22" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.lian.entity.TbCompanyResume" />
+        </set>
+        <set name="tbNewses" table="TB_NEWS" inverse="true" lazy="false" fetch="select">
+            <key>
+                <column name="NE_COMMANYID" precision="22" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.lian.entity.TbNews" />
+        </set>
+        <set name="tbRecruits" table="TB_RECRUIT" inverse="true" lazy="false" fetch="select">
+            <key>
+                <column name="COMPANY_ID" precision="22" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.lian.entity.TbRecruit" />
+        </set>
+        <set name="tbComments" table="TB_COMMENT" inverse="true" lazy="false" fetch="select">
+            <key>
+                <column name="CT_CID" precision="22" scale="0" />
+            </key>
+            <one-to-many class="com.lian.entity.TbComment" />
+        </set>
+    </class>
+</hibernate-mapping>

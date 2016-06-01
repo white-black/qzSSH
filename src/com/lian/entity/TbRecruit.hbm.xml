@@ -1,0 +1,61 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016-5-2 18:35:54 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.lian.entity.TbRecruit" table="TB_RECRUIT" schema="SCOTT">
+        <id name="rcId" type="int">
+            <column name="RC_ID" precision="22" scale="0" />
+            <generator class="sequence">
+	       		<param name="sequence">tbrecruit_pk_seq</param>
+	       </generator>
+        </id>
+        <many-to-one name="tbBoard" class="com.lian.entity.TbBoard" fetch="select">
+            <column name="TYPE_ID" precision="22" scale="0">
+                <comment>&#176;&#229;&#191;&#233;&#195;&#251;&#179;&#198;</comment>
+            </column>
+        </many-to-one>
+        <many-to-one name="tbCompany" class="com.lian.entity.TbCompany" fetch="select" lazy="false">
+            <column name="COMPANY_ID" precision="22" scale="0"   />
+        </many-to-one>
+        <property name="rcName" type="string">
+            <column name="RC_NAME" length="16"   />
+        </property>
+        <property name="rcDec" type="string">
+            <column name="RC_DEC" length="100" />
+        </property>
+        <property name="rcNeed" type="string">
+            <column name="RC_NEED" length="100" />
+        </property>
+        <property name="rcStarttime" type="date">
+            <column name="RC_STARTTIME" length="7"   />
+        </property>
+        <property name="rcEndtime" type="date">
+            <column name="RC_ENDTIME" length="7" />
+        </property>
+        <property name="rcCount" type="int">
+            <column name="RC_COUNT" precision="22" scale="0" />
+        </property>
+        <property name="rcExp" type="string">
+            <column name="RC_EXP" length="10">
+                <comment>&#188;&#184;&#196;&#234;&#185;&#164;&#215;&#247;&#190;&#173;&#209;&#233;</comment>
+            </column>
+        </property>
+        <property name="rcMoney" type="int">
+            <column name="RC_MONEY" precision="22" scale="0">
+                <comment>&#215;&#214;&#183;&#251;&#180;&#174;&#163;&#172;*---*</comment>
+            </column>
+        </property>
+        <property name="rcRecord" type="string">
+            <column name="RC_RECORD" length="10">
+                <comment>&#209;&#167;&#192;&#250;</comment>
+            </column>
+        </property>
+        <set name="tbUserRecruits" table="TB_USER_RECRUIT" inverse="true" lazy="false" fetch="select">
+            <key>
+                <column name="URC_RCID" precision="22" scale="0"   />
+            </key>
+            <one-to-many class="com.lian.entity.TbUserRecruit" />
+        </set>
+    </class>
+</hibernate-mapping>

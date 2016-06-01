@@ -1,0 +1,29 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016-5-2 18:35:54 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.lian.entity.TbNews" table="TB_NEWS" schema="SCOTT">
+        <id name="neId" type="int">
+            <column name="NE_ID" precision="22" scale="0" />
+            <generator class="sequence">
+	       		<param name="sequence">tbnews_pk_seq</param>
+	       </generator>
+        </id>
+        <many-to-one name="tbCompany" class="com.lian.entity.TbCompany" fetch="select">
+            <column name="NE_COMMANYID" precision="22" scale="0"/>
+        </many-to-one>
+        <many-to-one name="tbUser" class="com.lian.entity.TbUser" fetch="select">
+            <column name="NE_USERID" precision="22" scale="0"/>
+        </many-to-one>
+        <property name="neTitle" type="string">
+            <column name="NE_TITLE" length="30" />
+        </property>
+        <property name="neDate" type="date">
+            <column name="NE_DATE" length="7" not-null="true" />
+        </property>
+        <property name="neContent" type="string">
+            <column name="NE_CONTENT" length="300" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

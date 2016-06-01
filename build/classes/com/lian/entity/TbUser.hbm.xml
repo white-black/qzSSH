@@ -1,0 +1,84 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016-5-2 18:35:54 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.lian.entity.TbUser" table="TB_USER" schema="SCOTT">
+        <id name="UId" type="java.lang.Integer">
+            <column name="U_ID" precision="22" scale="0" />
+            <generator class="sequence">
+	       		<param name="sequence">tbuser_pk_seq</param>
+	       </generator>
+        </id>
+        <property name="UName" type="string">
+            <column name="U_NAME" length="16" not-null="true">
+                <comment>&#211;&#195;&#187;&#167;&#194;&#240;</comment>
+            </column>
+        </property>
+        <property name="UPassword" type="string">
+            <column name="U_PASSWORD" length="16" not-null="true" />
+        </property>
+        <property name="USex" type="string">
+            <column name="U_SEX" length="2" />
+        </property>
+        <property name="UDate" type="date" update="false">
+            <column name="U_DATE" length="7" not-null="true">
+                <comment>&#215;&#162;&#178;&#225;&#202;&#177;&#188;&#228;</comment>
+            </column>
+        </property>
+        <property name="USchool" type="string">
+            <column name="U_SCHOOL" length="30" />
+        </property>
+        <property name="UPrefessional" type="string">
+            <column name="U_PREFESSIONAL" length="30" />
+        </property>
+        <property name="URecord" type="string">
+            <column name="U_RECORD" length="10">
+                <comment>&#209;&#167;&#192;&#250;</comment>
+            </column>
+        </property>
+        <property name="UPhone" type="java.lang.Integer">
+            <column name="U_PHONE" precision="22" scale="0" />
+        </property>
+        <property name="UEmail" type="string">
+            <column name="U_EMAIL" length="20" />
+        </property>
+        <property name="UType" type="java.lang.Integer" update="false">
+            <column name="U_TYPE" precision="22" scale="0" not-null="true" />
+        </property>
+        <property name="UBirdate" type="date">
+            <column name="U_BIRDATE" length="7">
+                <comment>&#179;&#246;&#201;&#250;&#200;&#213;&#198;&#218;</comment>
+            </column>
+        </property>
+        <property name="URelname" type="string">
+            <column name="U_RELNAME" length="16">
+                <comment>&#213;&#230;&#202;&#181;&#208;&#213;&#195;&#251;</comment>
+            </column>
+        </property>
+        <set name="tbNewses" table="TB_NEWS" inverse="true" lazy="false" fetch="select" >
+            <key>
+                <column name="NE_USERID" precision="22" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.lian.entity.TbNews" />
+        </set>
+        <set name="tbResumes" table="TB_RESUME" inverse="true" lazy="false" fetch="select">
+            <key>
+                <column name="USER_ID" precision="22" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.lian.entity.TbResume" />
+        </set>
+        <set name="tbUserRecruits" table="TB_USER_RECRUIT" inverse="true" lazy="false" fetch="select">
+            <key>
+                <column name="URC_UID" precision="22" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.lian.entity.TbUserRecruit" />
+        </set>
+        <set name="tbComments" table="TB_COMMENT" inverse="true" lazy="false" fetch="select">
+            <key>
+                <column name="CT_UID" precision="22" scale="0" />
+            </key>
+            <one-to-many class="com.lian.entity.TbComment" />
+        </set>
+    </class>
+</hibernate-mapping>

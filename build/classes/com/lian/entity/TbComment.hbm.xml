@@ -1,0 +1,26 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016-5-2 18:35:54 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.lian.entity.TbComment" table="TB_COMMENT" schema="SCOTT">
+        <id name="ctId" type="int">
+            <column name="CT_ID" precision="22" scale="0" />
+            <generator class="sequence">
+	       		<param name="sequence">tbcomment_pk_seq</param>
+	       </generator>
+        </id>
+        <many-to-one name="tbCompany" class="com.lian.entity.TbCompany" lazy="false" fetch="select">
+            <column name="CT_CID" precision="22" scale="0" />
+        </many-to-one>
+        <many-to-one name="tbUser" class="com.lian.entity.TbUser" lazy="false" fetch="select">
+            <column name="CT_UID" precision="22" scale="0" />
+        </many-to-one>
+        <property name="ctContent" type="string">
+            <column name="CT_CONTENT" length="100" not-null="true" />
+        </property>
+        <property name="ctDate" type="date">
+            <column name="CT_DATE" length="7" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>

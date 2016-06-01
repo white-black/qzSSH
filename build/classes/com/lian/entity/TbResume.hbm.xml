@@ -1,0 +1,53 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016-5-2 18:35:54 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.lian.entity.TbResume" table="TB_RESUME" schema="SCOTT">
+        <id name="rsId" type="int">
+            <column name="RS_ID" precision="22" scale="0" />
+            <generator class="sequence">
+	       		<param name="sequence">tbresume_pk_seq</param>
+	       </generator>
+        </id>
+        <many-to-one name="tbUser" class="com.lian.entity.TbUser" fetch="select" lazy="false">
+            <column name="USER_ID" precision="22" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tbResume" class="com.lian.entity.TbResume" fetch="select">
+            <column name="RECRUID_ID" precision="22" scale="0">
+                <comment>&#213;&#208;&#198;&#184;&#208;&#197;&#207;&#162;&#163;&#168;&#213;&#208;&#198;&#184;&#214;&#176;&#206;&#187;&#195;&#251;&#179;&#198;&#163;&#169;</comment>
+            </column>
+        </many-to-one>
+        <property name="rsType" type="string">
+            <column name="RS_TYPE" length="16" not-null="true">
+                <comment>&#185;&#164;&#215;&#247;&#192;&#224;&#208;&#205;</comment>
+            </column>
+        </property>
+        <property name="rsMoney" type="int">
+            <column name="RS_MONEY" precision="22" scale="0" />
+        </property>
+        <property name="rsEva" type="string">
+            <column name="RS_EVA" length="100">
+                <comment>&#215;&#212;&#206;&#210;&#198;&#192;&#188;&#219;</comment>
+            </column>
+        </property>
+        <property name="rsFlag" type="int">
+            <column name="RS_FLAG" precision="22" scale="0" not-null="true" />
+        </property>
+        <set name="tbCompanyResumes" table="TB_COMPANY_RESUME" inverse="true" lazy="false" fetch="select">
+            <key>
+                <column name="CRS_RSID" precision="22" scale="0" not-null="true" />
+            </key>
+            <one-to-many class="com.lian.entity.TbCompanyResume" />
+        </set>
+        <set name="tbResumes" table="TB_RESUME" inverse="true" lazy="false" fetch="select">
+            <key>
+                <column name="RECRUID_ID" precision="22" scale="0">
+                    <comment>
+                    &#213;&#208;&#198;&#184;&#208;&#197;&#207;&#162;&#163;&#168;&#213;&#208;&#198;&#184;&#214;&#176;&#206;&#187;&#195;&#251;&#179;&#198;&#163;&#169;</comment>
+                </column>
+            </key>
+            <one-to-many class="com.lian.entity.TbResume" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,215 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE struts PUBLIC
+"-//Apache Software Foundation//DTD Struts Configuration 2.3//EN"
+"http://struts.apache.org/dtds/struts-2.3.dtd">
+<struts>
+	<!-- 声明包 -->
+	<constant name="struts.objectFactory" value="spring"/>
+	<constant name="struts.enable.DynamicMethodInvocation" value="true" />
+	<package name="myPackage"  extends="struts-default">
+		<!-- 验证登录 -->
+		<action name="login" class="login">
+			<result name="success">/index.jsp</result>
+			<result name="input">/login.jsp</result>
+			<result name="admin" type="redirect">getAllCompanys.action</result>
+		</action>
+		<!-- 注册 -->
+		<action name="register" class="register">
+			<result name="success">/index.jsp</result>
+			<result name="input">/register.jsp</result>
+		</action>
+		<!-- 注销登录 -->
+		<action name="quit" class="login" method="quit">
+			<result name="success">/index.jsp</result>
+			<result name="input">/index.jsp</result>
+		</action>
+		<!-- 管理员 -->
+		<action name="admin" class="admin">
+			<result name="success">/admin.jsp</result>
+			<result name="input">/admin.jsp</result>
+		</action>
+		<!-- 管理员后台 -->
+		<action name="getAllUsers" class="admin" method="getAllUsers">
+			<result name="success" type="redirect">admin.action?a_key=2</result>
+			<result name="input" type="redirect">admin.action?a_key=2</result>
+		</action>
+		<action name="delUser" class="admin" method="delUser">
+			<result name="success" type="redirect">getAllUsers.action?a_key=2</result>
+			<result name="input" type="redirect">getAllUsers.action?a_key=2</result>
+		</action>
+		<action name="getAllCompanys" class="admin" method="getAllCompanys">
+			<result name="success" type="redirect">admin.action?a_key=1</result>
+			<result name="input" type="redirect">admin.action?a_key=1</result>
+		</action>
+		<action name="delCompany" class="admin" method="delCompany">
+			<result name="success" type="redirect">getAllCompanys.action?a_key=1</result>
+			<result name="input" type="redirect">getAllCompanys.action?a_key=1</result>
+		</action>
+		<action name="saveNews" class="admin" method="saveNews">
+			<result name="success" type="redirect">getAllNewes.action?a_key=3</result>
+			<result name="input" type="redirect">getAllNewes.action?a_key=3</result>
+		</action>
+		<action name="getAllNewes" class="admin" method="getAllNewes">
+			<result name="success" type="redirect">admin.action?a_key=3</result>
+			<result name="input" type="redirect">admin.action?a_key=3</result>
+		</action>
+		<action name="delNews" class="admin" method="delNews">
+			<result name="success" type="redirect">getAllNewes.action?a_key=3</result>
+			<result name="input" type="redirect">getAllNewes.action?a_key=3</result>
+		</action>
+		<!-- 进入公司后台 -->
+			<!-- 不同的功能针对不同的跳转 -->
+		<action name="company" class="company">
+			<result name="success">/companyDetailed.jsp</result>
+			<result name="input">/companyDetailed.jsp</result>
+		</action>
+			<!-- 点击公司名进入公司后台 -->
+		<action name="companyDetailed" class="company" method="companyDetailed">
+			<result name="success" type="redirect">company.action</result>
+			<result name="input" type="redirect">company.action</result>
+		</action>
+			<!-- 修改公司信息 -->
+		<action name="alterCompanyDetailed" class="company" method="alterCompanyDetailed">
+			<result name="success" type="redirect">company.action?a_key=1</result>
+			<result name="input" type="redirect">company.action?a_key=11</result>
+		</action>
+			<!-- 显示当前公司所有的职位信息 -->
+		<action name="recruit" class="company" method="getRecruitsForCompany">
+			<result name="success"  type="redirect">company.action?a_key=2</result>
+			<result name="input"  type="redirect">company.action?a_key=2</result>
+		</action>
+			<!-- 显示此职位的具体信息 -->
+		<action name="getThisRecruit" class="company" method="getThisRecruit">
+			<result name="success"  type="redirect">company.action?a_key=22</result>
+			<result name="input"  type="redirect">company.action?a_key=2</result>
+		</action>
+			<!-- 新增职位信息 -->
+		<action name="saveRecruit" class="company" method="saveRecruit">
+			<result name="success" type="redirect">recruit.action?a_key=2</result>
+			<result name="input" type="redirect">company.action?a_key=21</result>
+		</action>
+			<!-- 修改职位信息 -->
+		<action name="alterRecruit" class="company" method="alterRecruit">
+			<result name="success" type="redirect">getThisRecruit.action?a_key=2</result>
+			<result name="input" type="redirect">getThisRecruit.action?a_key=21</result>
+		</action>	
+			<!-- 删除职位信息 -->
+		<action name="delThisRecruit" class="company" method="delThisRecruit">
+			<result name="success"  type="redirect">recruit.action</result>
+			<result name="input"  type="redirect">recruit.action</result>
+		</action>
+			<!-- 显示公司简历联系 -->
+		<action name="getResumeFromCompany" class="company" method="getResumeFromCompany">
+			<result name="success" type="redirect">company.action?a_key=3</result>
+			<result name="input" type="redirect">company.action?a_key=3</result>
+		</action>
+			<!-- 删除投递的简历 -->
+		<action name="delResumeFromCompany" class="company" method="delResumeFromCompany">
+			<result name="success" type="redirect">getResumeFromCompany</result>
+			<result name="input" type="redirect">getResumeFromCompany</result>
+		</action>
+		<!-- 进入用户后台 -->
+			<!-- 不同的功能针对不同的跳转 -->
+		<action name="user" class="user">
+			<result name="success">/userDetailed.jsp</result>
+			<result name="input">/userDetailed.jsp</result>
+		</action>
+			<!-- 点击用户名进入用户后台 -->
+		<action name="userDetailed" class="user" method="userDetailed">
+			<result name="success" type="redirect">user.action</result>
+			<result name="input" type="redirect">user.action</result>
+		</action>
+			<!-- 修改密码 -->
+		<action name="alterPassword" class="user" method="alterPassword">
+			<result name="success">/index.jsp</result>
+			<result name="input">/userDetailed.jsp</result>
+		</action>
+			<!-- 显示用户信息 -->
+		<action name="getUserMessage" class="user" method="getUserMessage">
+			<result name="success" type="redirect">user.action?a_key=2</result>
+			<result name="input" type="redirect">user.action?a_key=2</result>
+		</action>
+			<!-- 修改用户信息 -->
+		<action name="alterUserMessage" class="user" method="alterUserMessage">
+			<result name="success" type="redirect">getUserMessage.action</result>
+			<result name="input" type="redirect">user.action?a_key=21</result>
+		</action>
+			<!-- 显示简历 -->
+		<action name="getResumeMessage" class="user" method="getResumeMessage">
+			<result name="success" type="redirect">user.action?a_key=3</result>
+			<result name="input" type="redirect">user.action?a_key=3</result>
+		</action>
+			<!-- 修改简历 -->
+		<action name="alterResumeMessage" class="user" method="alterResumeMessage">
+			<result name="success" type="redirect">user.action?a_key=3</result>
+			<result name="input" type="redirect">user.action?a_key=31</result>
+		</action>
+			<!-- 获得当前用户投递过简历的职位 -->
+		<action name="getRecruitFromUser" class="user" method="getRecruitFromUser">
+			<result name="success" type="redirect">user.action?a_key=4</result>
+			<result name="input" type="redirect">user.action?a_key=4</result>
+		</action>
+			<!-- 删除投递简历的职位 -->
+		<action name="delRecuritFromUser" class="user" method="delRecuritFromUser">
+			<result name="success" type="redirect">getRecruitFromUser.action?a_key=4</result>
+			<result name="input" type="redirect">getRecruitFromUser.action?a_key=4</result>
+		</action>
+		
+		<!-- 首页 -->
+		<action name="getSomerecruitAndNews" class="index" method="getSomerecruitAndNews">
+			<result name="success">/index.jsp</result>
+			<result name="input">/index.jsp</result>
+		</action>
+		<!-- 我的简历，我的职位 -->
+		<!-- 查找职位 -->
+		<action name="searchRecruit" class="index" method="searchRecruit">
+			<result name="success">/index.jsp</result>
+			<result name="input">/index.jsp</result>
+		</action>
+		<!-- 获取所有职位 -->
+		<action name="getAllRecruits" class="index" method="getAllRecruits">
+			<result name="success">/allRecruit.jsp?pageNumber=${pageNumber}</result>
+			<result name="input">/allRecruit.jsp?pageNumber=${pageNumber}</result>
+		</action>
+		<!-- 获取所有简历 -->
+		<action name="getAllResumes" class="index" method="getAllResumes">
+			<result name="success">/allResume.jsp?pageNumber=${pageNumber}</result>
+			<result name="input">/allResume.jsp?pageNumber=${pageNumber}</result>
+		</action>
+		<!-- 点击新闻标题跳转到新闻页 -->
+		<action name="redirectNew" class="index" method="redirectNew">
+			<result name="success">/news.jsp</result>
+			<result name="input">/news.jsp</result>
+		</action>
+		<!-- 点击职位跳转到职位页面并显示职位页面信息 -->
+		<action name="redirectRecruit" class="index" method="redirectRecruit">
+			<result name="success">/recruit.jsp</result>
+			<result name="input">/index.jsp</result>
+		</action>
+		<!-- 点击公司简介跳转到公司页面 -->
+		<action name="redirectCompany" class="index" method="redirectCompany">
+			<result name="success">/company.jsp</result>
+			<result name="input">/index.jsp</result>
+		</action>
+		<!-- 点击简历信息跳转到简历页面 -->
+		<action name="redirectResume" class="index" method="redirectResume">
+			<result name="success">/resume.jsp</result>
+			<result name="input">/resume.jsp</result>
+		</action>
+			<!-- 投递简历 -->
+		<action name="setRecruit" class="company" method="setRecruit">
+			<result name="success">/recruit.jsp</result>
+			<result name="input">/recruit.jsp</result>
+		</action>
+		<!-- 公司保存评论 -->
+		<action name="saveComment" class="index" method="saveComment">
+			<result name="success" type="redirect">redirectCompany.action</result>
+			<result name="input" type="redirect">redirectCompany.action</result>
+		</action>
+		<!-- 职位 -->
+		<action name="recruitsaveComment" class="index" method="saveComment">
+			<result name="success" type="redirect">redirectRecruit.action</result>
+			<result name="input" type="redirect">redirectRecruit.action</result>
+		</action>
+	</package>
+</struts>

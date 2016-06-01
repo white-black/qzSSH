@@ -1,0 +1,34 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016-5-2 18:35:54 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.lian.entity.TbBoard" table="TB_BOARD" schema="SCOTT">
+        <id name="BId" type="int">
+            <column name="B_ID" precision="22" scale="0" />
+            <generator class="sequence">
+	       		<param name="sequence">tbboard_pk_seq</param>
+	       </generator>
+        </id>
+        <many-to-one name="tbBoard" class="com.lian.entity.TbBoard" fetch="select">
+            <column name="B_PARENTID" precision="22" scale="0" />
+        </many-to-one>
+        <property name="BName" type="string">
+            <column name="B_NAME" length="16" not-null="true" />
+        </property>
+        <set name="tbBoards" table="TB_BOARD" inverse="true" lazy="false" fetch="select">
+            <key>
+                <column name="B_PARENTID" precision="22" scale="0" />
+            </key>
+            <one-to-many class="com.lian.entity.TbBoard" />
+        </set>
+        <set name="tbRecruits" table="TB_RECRUIT" inverse="true" lazy="false" fetch="select">
+            <key>
+                <column name="TYPE_ID" precision="22" scale="0" not-null="true">
+                    <comment>&#176;&#229;&#191;&#233;&#195;&#251;&#179;&#198;</comment>
+                </column>
+            </key>
+            <one-to-many class="com.lian.entity.TbRecruit" />
+        </set>
+    </class>
+</hibernate-mapping>

@@ -1,0 +1,23 @@
+<?xml version="1.0"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<!-- Generated 2016-5-2 18:35:54 by Hibernate Tools 3.4.0.CR1 -->
+<hibernate-mapping>
+    <class name="com.lian.entity.TbUserRecruit" table="TB_USER_RECRUIT" schema="SCOTT">
+        <id name="urcId" type="int">
+            <column name="URC_ID" precision="22" scale="0" />
+            <generator class="sequence">
+	       		<param name="sequence">tbuserrecruit_pk_seq</param>
+	       </generator>
+        </id>
+        <many-to-one name="tbRecruit" class="com.lian.entity.TbRecruit" fetch="select">
+            <column name="URC_RCID" precision="22" scale="0" not-null="true" />
+        </many-to-one>
+        <many-to-one name="tbUser" class="com.lian.entity.TbUser" fetch="select">
+            <column name="URC_UID" precision="22" scale="0" not-null="true" />
+        </many-to-one>
+        <property name="urcDate" type="date">
+            <column name="URC_DATE" length="7" not-null="true" />
+        </property>
+    </class>
+</hibernate-mapping>
